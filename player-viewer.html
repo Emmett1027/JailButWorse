@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>JailButWorse — Player Viewer</title>
+    <meta name="description" content="View player stats for the JailButWorse Minehut prison server." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="https://codehs.com/uploads/04f4a0e98e0126ce9ec8c8d93bd585ac">
+    <style>
+        /* Additional styles to override site CSS for this page */
+        .player-container {
+            max-width: 780px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(12, 18, 35, 0.06);
+            margin-top: 20px;
+        }
+        .player-container h1 {
+            margin-bottom: 12px;
+            font-size: 24px;
+            color: #0f172a;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #e6edf3;
+            border-radius: 6px;
+            margin-top: 6px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: none;
+            background: #0ea5a4;
+            color: white;
+            cursor: pointer;
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 12px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .card {
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .muted {
+            color: #64748b;
+            font-size: 13px;
+        }
+        pre {
+            background: #0f172a;
+            color: #e6edf3;
+            padding: 12px;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 240px;
+        }
+        .small {
+            font-size: 13px;
+            color: #334155;
+        }
+    </style>
+</head>
+<body class="dark">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="topbar" role="banner">
+        <div class="container topbar-inner">
+            <a class="brand" href="index.html">JailButWorse</a>
+            <nav class="nav" role="navigation" aria-label="Primary">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="gameplay.html">Gameplay</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="connect.html">Connect</a></li>
+                    <li><a href="player-viewer.html" class="active">Player Viewer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" style="color:black">
+        <section class="player-container">
+            <h1>Player Stat Viewer</h1>
+            <label>Player Name</label>
+            <input id="playerName" type="text" placeholder="Enter exact player_name" />
+            
+            <div class="row">
+                <button id="loadBtn">Load Player</button>
+                <label style="display:flex; align-items:center; gap:8px; margin-left:12px;">
+                    <input id="autoPoll" type="checkbox" /> Auto-refresh (10s)
+                </label>
+                <div style="margin-left:auto" class="small muted">Data fetched from public.player_data</div>
+            </div>
+            
+            <div id="status" class="muted small" style="margin-top:12px;"></div>
+            
+            <div id="result" style="margin-top:16px; display:none;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <div>
+                        <h2 id="displayName" style="margin:0"></h2>
+                        <div class="muted" id="lastOnline"></div>
+                    </div>
+                    <div style="margin-left:auto" class="small">
+                        <div>Level <strong id="levelVal"></strong></div>
+                        <div>Exp <strong id="expVal"></strong></div>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="card">
+                        <div class="muted">Balance</div>
+                        <div style="font-size:18px;font-weight:600;color:black" id="balanceVal">0</div>
+                    </div>
+                    <div class="card">
+                        <div class="muted">Kills</div>
+                        <div style="font-size:18px;font-weight:600;color:black" id="killsVal">0</div>
+                    </div>
+                    <div class="card">
+                        <div class="muted">Deaths</div>
+                        <div style="font-size:18px;font-weight:600;color:black" id="deathsVal">0</div>
+                    </div>
+                    <div class="card">
+                        <div class="muted">Created</div>
+                        <div class="small" id="createdAt"></div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:18px">Description</h3>
+                <div id="description" class="small"></div>
+
+                <h3 style="margin-top:12px">Metadata (raw)</h3>
+                <pre id="metadataRaw">{}</pre>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>© <span id="year"></span> JailButWorse — Hosted on Minehut · Server IP: <strong>JailButWorse.minehut.gg</strong></p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="./player-viewer.js"></script>
+</body>
+</html>
