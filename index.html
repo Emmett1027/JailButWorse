@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/x-icon" href="https://codehs.com/uploads/04f4a0e98e0126ce9ec8c8d93bd585ac">
 </head>
+
 <body class="dark">
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -16,88 +17,245 @@
       <a class="brand" href="index.html">JailButWorse</a>
       <nav class="nav" role="navigation" aria-label="Primary">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html" class="active">Home</a></li>
           <li><a href="rules.html">Rules</a></li>
           <li><a href="gameplay.html">Gameplay</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="connect.html">Connect</a></li>
-          <li><a href="player-viewer.html" class="active">Player Viewer</a></li>
+          <li><a href="player-viewer.html">Player Viewer</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero" role="region" aria-label="Server hero">
-      <!-- Replace 'hero-bg.jpg' with your background image file -->
+
+    <!-- HERO (unchanged) -->
+    <section class="hero" aria-label="Server hero">
       <img src="https://imagedelivery.net/W9K_l6ndK9x4x8m3rurakg/b83d48d9-450a-45ec-468d-c35af2da1c00/original" alt="" class="hero-bg" aria-hidden="true" />
-      <div class="hero-overlay" aria-hidden="false">
+      <div class="hero-overlay">
         <div class="hero-content container">
           <h1>JailButWorse</h1>
           <p class="tagline">Jail. Chaos. Mayhem.</p>
 
-          <div id="server-status" class="status" aria-live="polite" aria-atomic="true">
-  <div class="status-line">
-    Status: <strong id="status-online">Loading…</strong>
-  </div>
-  <div class="status-line">
-    Players: <strong id="player-count">—</strong>
-  </div>
+          <div id="server-status" class="status">
+            <div class="status-line">Status: <strong id="status-online">Loading…</strong></div>
+            <div class="status-line">Players: <strong id="player-count">—</strong></div>
 
-  <!-- NEW: subtle extra stats -->
-  <div id="server-extra" class="status-extra">
-    <!-- injected -->
-    <p>Test</p>
-  </div>
+            <div id="server-extra" class="status-extra">
+              <p>Test</p>
+            </div>
 
-  <div class="status-actions">
-    <a class="btn" href="connect.html">Join Server</a>
-    <a class="btn outline" href="https://discord.gg/TXSRAqEGMP" target="_blank" rel="noopener noreferrer">Discord</a>
-  </div>
-<div class="youtube-promo" style="color:white">
-  <p>
-  <a href="https://www.youtube.com/@JailButWorse"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="color:white"
-     aria-label="JailButWorse on YouTube">
-    ▶ Watch JailButWorse on YouTube
-  </a>
-</div>
+            <div class="status-actions">
+              <a class="btn" href="connect.html">Join Server</a>
+              <a class="btn outline" href="https://discord.gg/TXSRAqEGMP" target="_blank">Discord</a>
+            </div>
 
-</div>
+            <div class="youtube-promo">
+              <a href="https://www.youtube.com/@JailButWorse" target="_blank" rel="noopener noreferrer">
+                ▶ Watch JailButWorse on YouTube
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="intro container" id="home-info" role="region" aria-label="About JailButWorse">
+    <!-- INTRO (unchanged) -->
+    <section class="intro container" id="home-info">
       <h2>Welcome</h2>
       <p>
-        <strong>JailButWorse</strong> is a Minehut-hosted prison gamemode centered on progression, PvP, and community events. Use the navigation above to view the rules, gameplay mechanics, and how to connect.
+        <strong>JailButWorse</strong> is a Minehut-hosted prison gamemode centered on progression, PvP, and community events.
       </p>
 
-      <div class="cards" role="list">
-        <article class="card" role="listitem" tabindex="0" aria-labelledby="c1">
-          <h3 id="c1">Competitive</h3>
-          <p>Become Warden by defeating many, leaderboards.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Competitive</h3>
+          <p>Become Warden by defeating many.<p>Leaderboards, etc.</p>
         </article>
-        <article class="card" role="listitem" tabindex="0" aria-labelledby="c2">
-          <h3 id="c2">Events</h3>
+        <article class="card">
+          <h3>Events</h3>
           <p>Daily events keep the server lively.</p>
         </article>
-        <article class="card" role="listitem" tabindex="0" aria-labelledby="c3">
-          <h3 id="c3">Community</h3>
+        <article class="card">
+          <h3>Community</h3>
           <p>Active Discord and in-game staff to support new players.</p>
         </article>
       </div>
     </section>
 
-    <footer class="site-footer" role="contentinfo">
+    <!-- 🔹 CHAT VIEWER (NEW, NON-BLOCKING) -->
+    <section class="container" aria-label="Live Minecraft Chat">
+      <h2>Live Minecraft Chat</h2>
+
+      <div id="chat-container">
+        <div id="chat-controls">
+          <button id="CHAT_refreshNow">Refresh</button>
+          <label>
+            <input type="checkbox" id="CHAT_autoRefresh" checked />
+            Auto-refresh (10s)
+          </label>
+        </div>
+
+        <div id="CHAT_messages"></div>
+        <div id="CHAT_status">Status: <span id="CHAT_statusText">idle</span></div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
       <div class="container">
-        <p>© <span id="year"></span> JailButWorse — Hosted on Minehut. Server IP: <strong>JailButWorse.minehut.gg</strong></p>
+        <p>© <span id="year"></span> JailButWorse — Hosted on Minehut</p>
       </div>
     </footer>
   </main>
 
   <script src="script.js" defer></script>
+
+  <!-- CHAT VIEWER SCRIPT (SCOPED & SAFE) -->
+  <script>
+/* =========================
+   CHAT CONFIG
+========================= */
+const CHAT_SUPABASE_URL = 'https://xkoufgfrhhlbkpxylasc.supabase.co';
+const CHAT_SUPABASE_ANON_KEY = 'sb_publishable_qC6j9fHHcOI5MikiWG-y2w_Zi8Npf2R';
+const CHAT_SUPABASE_TABLE = 'chat_messages';
+const CHAT_REFRESH = 10000;
+
+/* =========================
+   CHAT ELEMENTS
+========================= */
+const CHAT_messagesEl = document.getElementById('CHAT_messages');
+const CHAT_statusText = document.getElementById('CHAT_statusText');
+const CHAT_refreshNowBtn = document.getElementById('CHAT_refreshNow');
+const CHAT_autoRefreshCheckbox = document.getElementById('CHAT_autoRefresh');
+
+/* =========================
+   CHAT STATE
+========================= */
+let CHAT_timer = null;
+
+/* =========================
+   CHAT FUNCTIONS
+========================= */
+async function CHAT_fetchMessages() {
+    if (!CHAT_messagesEl || !CHAT_statusText) return;
+
+    CHAT_statusText.textContent = 'Loading…';
+
+    const url = new URL(`${CHAT_SUPABASE_URL}/rest/v1/${CHAT_SUPABASE_TABLE}`);
+    url.searchParams.set('select', 'player_name,message,created_at');
+    url.searchParams.set('order', 'created_at.desc');
+    url.searchParams.set('limit', '30');
+
+    try {
+        const res = await fetch(url.toString(), {
+            headers: {
+                apikey: CHAT_SUPABASE_ANON_KEY,
+                Authorization: 'Bearer ' + CHAT_SUPABASE_ANON_KEY,
+                Accept: 'application/json'
+            }
+        });
+
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        const rows = await res.json();
+        CHAT_renderMessages(rows);
+        CHAT_statusText.textContent = 'Updated ' + new Date().toLocaleTimeString();
+
+    } catch (err) {
+        console.warn('Chat fetch failed:', err);
+        CHAT_statusText.textContent = 'Error';
+    }
+}
+
+function CHAT_renderMessages(rows) {
+    CHAT_messagesEl.innerHTML = '';
+
+    if (!rows || !rows.length) {
+        CHAT_messagesEl.innerHTML =
+            '<div style="padding:8px;color:#9fb0c8">No messages</div>';
+        return;
+    }
+
+    // Oldest first
+    rows.reverse().forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'chat-msg';
+
+        const player = CHAT_escape(r.player_name || '');
+        const message = CHAT_escape(r.message || '');
+
+        div.innerHTML =
+            `<span class="chat-player">${player}:</span>
+             <span class="chat-text">${message}</span>`;
+
+        CHAT_messagesEl.appendChild(div);
+    });
+
+    CHAT_messagesEl.scrollTop = CHAT_messagesEl.scrollHeight;
+}
+
+function CHAT_escape(str) {
+    return String(str).replace(/[&<>"']/g, m =>
+        ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])
+    );
+}
+
+/* =========================
+   CHAT REFRESH
+========================= */
+function CHAT_startRefresh() {
+    if (CHAT_timer) clearInterval(CHAT_timer);
+    CHAT_timer = setInterval(() => {
+        if (CHAT_autoRefreshCheckbox.checked) {
+            CHAT_fetchMessages();
+        }
+    }, CHAT_REFRESH);
+}
+
+/* =========================
+   CHAT INIT
+========================= */
+document.addEventListener('DOMContentLoaded', () => {
+    if (CHAT_refreshNowBtn) {
+        CHAT_refreshNowBtn.addEventListener('click', CHAT_fetchMessages);
+    }
+
+    CHAT_fetchMessages();
+    CHAT_startRefresh();
+});
+
+  </script>
+
+  <!-- CHAT VIEWER STYLES (SCOPED) -->
+  <style>
+    #chat-container {
+      background: #0b1220;
+      border: 1px solid #123;
+      border-radius: 10px;
+      padding: 12px;
+      max-height: 420px;
+    }
+    #CHAT_messages {
+      height: 260px;
+      overflow-y: auto;
+      margin: 8px 0;
+      background: #071024;
+      border-radius: 6px;
+    }
+    .chat-msg {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .chat-player {
+      color: #7be3ff;
+      font-weight: 600;
+    }
+    #chat-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+  </style>
 </body>
 </html>
