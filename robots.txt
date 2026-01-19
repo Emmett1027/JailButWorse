@@ -1,0 +1,6 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Link to the sitemap for easier indexing
+Sitemap: https://emmett1027.github.io/JailButWorse/sitemap.xml
