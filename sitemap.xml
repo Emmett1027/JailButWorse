@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home page -->
+  <url>
+    <loc>https://emmett1027.github.io/JailButWorse/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Rules page -->
+  <url>
+    <loc>https://emmett1027.github.io/JailButWorse/rules.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Gameplay page -->
+  <url>
+    <loc>https://emmett1027.github.io/JailButWorse/gameplay.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About Us page -->
+  <url>
+    <loc>https://emmett1027.github.io/JailButWorse/about.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Connect page -->
+  <url>
+    <loc>https://emmett1027.github.io/JailButWorse/connect.html</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Player Viewer page -->
+  <url>
+    <loc>https://emmett1027.github.io/JailButWorse/player-viewer.html</loc>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
